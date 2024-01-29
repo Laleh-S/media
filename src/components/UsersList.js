@@ -1,12 +1,13 @@
 // Whenever userList appears on screen we want to fetch some data
 
-//! Note
+// useSelector
 // We make use of "useSelector hook" to access our states inside of a component. 
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchUsers } from "../store";
+import Skeleton from "./Skeleton";
 
 function UsersList () {
     const dispatch = useDispatch(); // accessing to the dispatch function 
@@ -21,7 +22,7 @@ function UsersList () {
 
     // Show a loading message while we are making a request
     if (isLoading){
-        return <div>Loading...</div>
+        return <Skeleton times={6} /> // times={6} -> will return 6 lines of loading boxex 
     }
 
     // If an error accurs with our request, showing an error message.
