@@ -1,7 +1,7 @@
 // Whenever userList appears on screen we want to fetch some data
 
 //! Note
-// We make use of "useSelector hook" to access our states inside of a component.
+// We make use of "useSelector hook" to access our states inside of a component. 
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
