@@ -6,7 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { usersReducer } from "./slices/usersSlice";
 
 
-// Exporting store to wire it up to React.
+// Exporting store so we can wire it up to React side of application.
 export const store = configureStore({ // create store by calling configureStore
     reducer: {
         users: usersReducer,
@@ -14,3 +14,4 @@ export const store = configureStore({ // create store by calling configureStore
 });
 
 
+export * from './thunks/fetchUsers'; 
