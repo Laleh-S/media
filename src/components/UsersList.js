@@ -22,7 +22,8 @@ function UsersList () {
 
     // Show a loading message while we are making a request
     if (isLoading){
-        return <Skeleton times={6} /> // times={6} -> will return 6 lines of loading boxex 
+        // times={6} -> Return 6 lines of boxex. w-full ->  Expands the X direction as much as possible.
+        return <Skeleton times={6} className="h-10 w-full"/> 
     }
 
     // If an error accurs with our request, showing an error message.
