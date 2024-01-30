@@ -6,8 +6,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchUsers } from "../store";
+import { fetchUsers, addUser } from "../store";
 import Skeleton from "./Skeleton";
+import Button from "./Button";
 
 function UsersList () {
     const dispatch = useDispatch(); // accessing to the dispatch function 
@@ -19,6 +20,12 @@ function UsersList () {
     useEffect(() => { //* step 6 of creating a thunk
         dispatch(fetchUsers());
     }, []); // Runs automatically the first time our component is rendered onto the page when we put [] as second argument
+
+
+    const handdleAddUser = () => {
+        // To run a thunk, we call dispatch and pass in the thunk function and call it at the same time.
+        dispatch(addUser());
+    };
 
     // Show a loading message while we are making a request
     if (isLoading){
@@ -33,16 +40,26 @@ function UsersList () {
 
     const renderedUsers = data.map((user) => {
         // for every user will return a div that have a key of user.id
-        return <div key={user.id} className="mb-2 border rounded">
-            <div className="flex p-2 justify-between items-center cursor-pointer">
-                {user.name}
+        return (
+            <div key={user.id} className="mb-2 border rounded">
+                <div className="flex p-2 justify-between items-center cursor-pointer">
+                    {user.name}
+                </div>
             </div>
-        </div>
+        );
     });
     // When we get our date, hide the loading message and show list of users
     // Mapping over that data array, rendering out each individual user inside of a gray box,
-    return <div>{renderedUsers}</div>
-
+    return <div>
+            <div className="flex flex-row justify-between m-3">
+                <h1 className="m-2 text-xl">Users</h1>
+                <Button onClick={handdleAddUser}>
+                    + Add User
+                </Button>
+            </div>
+            {renderedUsers}
+        </div>
+    
 };
 
 export default UsersList;
