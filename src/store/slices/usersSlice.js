@@ -3,6 +3,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUsers } from "../thunks/fetchUsers"; //* step 4 of creating a thunk
+import { addUser } from "../thunks/addUser";
 
 const usersSlice = createSlice({
     name: 'users',
@@ -16,6 +17,8 @@ const usersSlice = createSlice({
     // that are not inherently tied to the slice. So we want to watch for "pending", "fulfilled", and "rejected". 
     // To tell Redux Toolkit that we want to watch for the above actions, we call "builder.addCase" 3 separate times.
     extraReducers(builder) { 
+        // ++++++++++ fetchUser Builder Cases ++++++++++
+        // +++++++++++++++++++++++++++++++++++++++++++++
         builder.addCase(fetchUsers.pending, (state, action) => {
             // when we start the request, we want to change isLoading to be true
             state.isLoading = true;
@@ -23,17 +26,31 @@ const usersSlice = createSlice({
         builder.addCase(fetchUsers.fulfilled, (state, action) => { // <- the "action" here contains our data which is the list of users. 
             // If request completed successfully, we want isLoading to be false 
             state.isLoading = false;
-            // set the data to whatever data we fetching
-            state.data = action.payload; // <- The "payload is the data we actually fetch"
+            state.data = action.payload;
 
         });
         builder.addCase(fetchUsers.rejected, (state, action) => { 
-            // if something went wrong we set isLoading to false 
+            // If something went wrong we set isLoading to false 
             state.isLoading = false;
-            //  set the error piece of state to be the error object.
+            state.error = action.error; // Set the error piece of state to be the error object.
+        });
+
+        // ++++++++++ addUser ++++++++++
+        // +++++++++++++++++++++++++++++
+        builder.addCase(addUser.pending, (state, action) => {
+            state.isLoading = true;
+        });
+
+        builder.addCase(addUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.data.push(action.payload); // <- Push a new user to our data
+        });
+
+        builder.addCase(addUser.rejected, (state, action) => {
+            state.isLoading = false;
             state.error = action.error;
         });
-    }
+    }, 
 }); // Making the userSlice using createSlice helper.
 
 export const usersReducer = usersSlice.reducer;
