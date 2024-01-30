@@ -31,14 +31,22 @@ function UsersList () {
         return <div>Error fetching data...</div>
     }
 
+    const renderedUsers = data.map((user) => {
+        // for every user will return a div that have a key of user.id
+        return <div key={user.id} className="mb-2 border rounded">
+            <div className="flex p-2 justify-between items-center cursor-pointer">
+                {user.name}
+            </div>
+        </div>
+    });
     // When we get our date, hide the loading message and show list of users
-    return <div>
-        {data.length}
-    </div>;
+    // Mapping over that data array, rendering out each individual user inside of a gray box,
+    return <div>{renderedUsers}</div>
 
 };
 
 export default UsersList;
+
 
 
 
