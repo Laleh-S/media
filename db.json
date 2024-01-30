@@ -1,6 +1,38 @@
-
 {
-    "users": [{"id": 1, "name": "Laleh"}],
-    "albums": [],
-    "photos": []
+  "users": [
+    {
+      "id": "1",
+      "name": "Laleh Shahidi"
+    },
+    {
+      "id": "ddb0",
+      "name": "Brandi Okuneva"
+    },
+    {
+      "id": "9360",
+      "name": "Stella Kunde"
+    },
+    {
+      "id": "86ae",
+      "name": "Martha McKenzie"
+    },
+    {
+      "id": "562a",
+      "name": "Cameron Hettinger"
+    },
+    {
+      "id": "8128",
+      "name": "Tim Schneider"
+    },
+    {
+      "id": "25fc",
+      "name": "Dr. Angel Kunde"
+    },
+    {
+      "id": "b7c6",
+      "name": "Ginger Hilll DVM"
+    }
+  ],
+  "albums": [],
+  "photos": []
 }
