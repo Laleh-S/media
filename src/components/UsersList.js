@@ -54,11 +54,10 @@ function UsersList () {
     return <div>
             <div className="flex flex-row justify-between m-3">
                 <h1 className="m-2 text-xl">Users</h1>
-                {
-                    // If creating a user, show 'creating user' message, else show the button.
-                    isCreatingUser ? 'Creating User...' : <Button onClick={handdleAddUser}>+ Add User</Button>
-                }
-                    {/*// If that is truthy, if we do have an error, print out error message*/}
+                <Button loading={isCreatingUser} onClick={handdleAddUser}>
+                    + Add User
+                </Button>
+                {/* If that is truthy, if we do have an error, print out error message*/}
                 {creatingUserError && 'Error Creating User...'}  
             </div>
             {renderedUsers}
