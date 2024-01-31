@@ -15,5 +15,6 @@ export const store = configureStore({ // create store by calling configureStore
 
 export * from './thunks/fetchUsers'; //* step 5 of creating a thunk
 export * from './thunks/addUser';
+export * from './thunks/removeUser';
 
 
