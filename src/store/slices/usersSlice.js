@@ -4,6 +4,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUsers } from "../thunks/fetchUsers"; //* step 4 of creating a thunk
 import { addUser } from "../thunks/addUser";
+import { removeUser } from "../thunks/removeUser";
 
 const usersSlice = createSlice({
     name: 'users',
@@ -17,7 +18,7 @@ const usersSlice = createSlice({
     // that are not inherently tied to the slice. So we want to watch for "pending", "fulfilled", and "rejected". 
     // To tell Redux Toolkit that we want to watch for the above actions, we call "builder.addCase" 3 separate times.
     extraReducers(builder) { 
-        // ++++++++++ fetchUser Builder Cases ++++++++++
+        // ++++++++++ fetchUser extra Cases ++++++++++++
         // +++++++++++++++++++++++++++++++++++++++++++++
         builder.addCase(fetchUsers.pending, (state, action) => {
             // when we start the request, we want to change isLoading to be true
@@ -35,8 +36,8 @@ const usersSlice = createSlice({
             state.error = action.error; // Set the error piece of state to be the error object.
         });
 
-        // ++++++++++ addUser ++++++++++
-        // +++++++++++++++++++++++++++++
+        // ++++++++++ addUser extra cases ++++++++++++
+        // +++++++++++++++++++++++++++++++++++++++++++
         builder.addCase(addUser.pending, (state, action) => {
             state.isLoading = true;
         });
@@ -50,6 +51,24 @@ const usersSlice = createSlice({
             state.isLoading = false;
             state.error = action.error;
         });
+
+        // ++++++++++ removeUser extra cases ++++++++++
+        // ++++++++++++++++++++++++++++++++++++++++++++
+        builder.addCase(removeUser.pending, (state, action) => {
+            state.isLoading = true;
+        });
+
+        builder.addCase(removeUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            console.log(action)
+        });
+
+        builder.addCase(removeUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.error;
+        });
+
+
     }, 
 }); // Making the userSlice using createSlice helper.
 
