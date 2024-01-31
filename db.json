@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "name": "Laleh Shahidi"
+      "name": "Laleh Khiabani"
     },
     {
       "id": "ddb0",
@@ -31,6 +31,18 @@
     {
       "id": "81bd",
       "name": "Lynda Bosco"
+    },
+    {
+      "id": "a3c7",
+      "name": "Curtis Swift"
+    },
+    {
+      "id": "8f88",
+      "name": "Tami Harvey"
+    },
+    {
+      "id": "af4d",
+      "name": "Grant O'Connell"
     }
   ],
   "albums": [],

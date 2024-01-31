@@ -4,37 +4,38 @@
 // We make use of "useSelector hook" to access our states inside of a component. 
 
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useSelector } from "react-redux";
 import { fetchUsers, addUser } from "../store";
 import Skeleton from "./Skeleton";
 import Button from "./Button";
+import { useThunk } from "../hooks/use-thunk";
+
 
 function UsersList () {
-    const dispatch = useDispatch(); // accessing to the dispatch function 
-    const { isLoading, data, error } = useSelector((state) => { // calling useSelector with our big "state" object.
+    const [doFetchUsers, isLoadingUsers, loadingUsersError] = useThunk(fetchUsers);
+    const [doCreateUser, isCreatingUser, creatingUserError] = useThunk(addUser);
+
+    const { data } = useSelector((state) => { // calling useSelector with our big "state" object.
         return state.users; // ->  give us the user portion of the state {data:[], isLoadig:false, error:null} So we need to
         // destructure these properties from what gets returned from useSelector and use them to customize what our component displays.
     });
 
     useEffect(() => { //* step 6 of creating a thunk
-        dispatch(fetchUsers());
+        doFetchUsers()
     }, []); // Runs automatically the first time our component is rendered onto the page when we put [] as second argument
 
-
     const handdleAddUser = () => {
-        // To run a thunk, we call dispatch and pass in the thunk function and call it at the same time.
-        dispatch(addUser());
+        doCreateUser()
     };
 
-    // Show a loading message while we are making a request
-    if (isLoading){
+    // Show a loading message if isLoadingUsers is true
+    if (isLoadingUsers){
         // times={6} -> Return 6 lines of boxex. w-full ->  Expands the X direction as much as possible.
         return <Skeleton times={6} className="h-10 w-full"/> 
     }
 
     // If an error accurs with our request, showing an error message.
-    if (error){
+    if (loadingUsersError){
         return <div>Error fetching data...</div>
     }
 
@@ -53,14 +54,17 @@ function UsersList () {
     return <div>
             <div className="flex flex-row justify-between m-3">
                 <h1 className="m-2 text-xl">Users</h1>
-                <Button onClick={handdleAddUser}>
-                    + Add User
-                </Button>
+                {
+                    // If creating a user, show 'creating user' message, else show the button.
+                    isCreatingUser ? 'Creating User...' : <Button onClick={handdleAddUser}>+ Add User</Button>
+                }
+                    {/*// If that is truthy, if we do have an error, print out error message*/}
+                {creatingUserError && 'Error Creating User...'}  
             </div>
             {renderedUsers}
         </div>
     
-};
+}; 
 
 export default UsersList;
 
