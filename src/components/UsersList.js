@@ -28,31 +28,31 @@ function UsersList () {
         doCreateUser()
     };
 
-    // Show a loading message if isLoadingUsers is true
+    let content;
+    // If loading users is true, we assign the skeleton to the content variable.
     if (isLoadingUsers){
         // times={6} -> Return 6 lines of boxex. w-full ->  Expands the X direction as much as possible.
-        return <Skeleton times={6} className="h-10 w-full"/> 
-    }
-
-    // If an error accurs with our request, showing an error message.
-    if (loadingUsersError){
-        return <div>Error fetching data...</div>
-    }
-
-    const renderedUsers = data.map((user) => {
-        // for every user will return a div that have a key of user.id
-        return (
-            <div key={user.id} className="mb-2 border rounded">
-                <div className="flex p-2 justify-between items-center cursor-pointer">
-                    {user.name}
+        content = <Skeleton times={6} className="h-10 w-full"/> 
+        // If not loading users, but there is an error we assign the div with error message to the content variable.
+    } else if (loadingUsersError){ 
+        content = <div>Error fetching data...</div>
+        // If not loading users and there are no errors then we assign the list of users to the content variable.
+    } else {
+        content = data.map((user) => {
+            // for every user will return a div that have a key of user.id
+            return (
+                <div key={user.id} className="mb-2 border rounded">
+                    <div className="flex p-2 justify-between items-center cursor-pointer">
+                        {user.name}
+                    </div>
                 </div>
-            </div>
-        );
-    });
-    // When we get our date, hide the loading message and show list of users
-    // Mapping over that data array, rendering out each individual user inside of a gray box,
+            );
+        });
+    }
+
+    // Header is always visible
     return <div>
-            <div className="flex flex-row justify-between m-3">
+            <div className="flex flex-row justify-between items-center m-3">
                 <h1 className="m-2 text-xl">Users</h1>
                 <Button loading={isCreatingUser} onClick={handdleAddUser}>
                     + Add User
@@ -60,7 +60,7 @@ function UsersList () {
                 {/* If that is truthy, if we do have an error, print out error message*/}
                 {creatingUserError && 'Error Creating User...'}  
             </div>
-            {renderedUsers}
+            {content}
         </div>
     
 }; 
