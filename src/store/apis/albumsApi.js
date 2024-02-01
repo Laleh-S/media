@@ -18,6 +18,7 @@
 // We created this file inside store directory //* step 2 of Creating a RTK Query API
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { faker } from "@faker-js/faker";
 
 const albumsApi = createApi({
     reducerPath: 'albums',  //* step 3 of Creating a RTK Query API
@@ -28,6 +29,19 @@ const albumsApi = createApi({
     }),
     endpoints(builder){  //* step 5 of Creating a RTK Query API
         return {
+            addAlbum: builder.mutation({
+                query: (user) => {
+                    return {
+                        url: '/albums',
+                        method: 'POST',
+                        body: {
+                            userId: user.id,
+                            title: faker.commerce.productName() // our randomly generated title.
+                        }
+                    };
+                }
+            }),
+
             fetchAlbums: builder.query({
                 query: (user) => { // the user is an object with a name and an id.
                     return {
@@ -48,5 +62,5 @@ const albumsApi = createApi({
 // If put getAlbums instead, then the name of the hook would've instead been "useGetAlbumsQuery".
 
 //* step 6 of Creating a RTK Query API
-export const { useFetchAlbumsQuery } = albumsApi;
+export const { useFetchAlbumsQuery, useAddAlbumMutation } = albumsApi;
 export { albumsApi };

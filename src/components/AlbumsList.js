@@ -1,4 +1,4 @@
-import { useFetchAlbumsQuery } from "../store";
+import { useFetchAlbumsQuery, useAddAlbumMutation } from "../store";
 import Skeleton from "./Skeleton";
 import ExpandablePanel from "./ExpandablePanel";
 import Button from "./Button";
@@ -12,6 +12,11 @@ function AlbumsList ({ user }) {
     // isLoading is gonna be a Boolean true or false.  It's gonna be true if we are currently in the process of making the request.
     
     const { isLoading, data, error } = useFetchAlbumsQuery(user);   //* step 9 of Creating a RTK Query API
+    const [ addAlbum, results] = useAddAlbumMutation()
+
+    const handleAddAlbum = () => {
+        addAlbum(user); // This is the user we want to tie this album to 
+    };
 
     let content;
     //  If isLoading is true, then set content to be skeleton.
@@ -32,6 +37,9 @@ function AlbumsList ({ user }) {
     return (
         <div>
             <div>Albums for {user.name}</div>
+            <Button onClick={handleAddAlbum}>
+                + Add Album
+            </Button>
             <div>{content}</div>
         </div>
     )
