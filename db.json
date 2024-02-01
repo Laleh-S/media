@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "name": "Laleh Khiabani"
+      "name": "Laleh"
     },
     {
       "id": "86ae",
@@ -21,6 +21,12 @@
       "name": "Grant O'Connell"
     }
   ],
-  "albums": [],
+  "albums": [
+    {
+      "id": 10,
+      "title": "The Balkans Trip",
+      "userId": "1"
+    }
+  ],
   "photos": []
 }

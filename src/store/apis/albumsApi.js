@@ -9,9 +9,9 @@
 // 4- The API needs to know how and where to send requests. Add a "baseQuary"
 // 5- Add "endpoints", one for each kind of request you want to make. Reqs that read data are queries, write data are mutation.
 // 6- Export all the automatically generated hooks.
-// 7- connect the API to the store. Reducer, middleware and listeners.
+// 7- connect the API to the store. Reducer, middleware and listeners. //* inside store/index.js
 // 8- Export the hooks from the store/index.js file
-// 9- Use the generated hooks in a component.
+// 9- Use the generated hooks in a component. //* inside AlbumsList component
 
 
 // fetch, create, delete requests for Users, Albums, photos. //* step 1 of Creating a RTK Query API
