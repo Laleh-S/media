@@ -98,5 +98,5 @@ const albumsApi = createApi({
 // If put getAlbums instead, then the name of the hook would've instead been "useGetAlbumsQuery".
 
 //* step 6 of Creating a RTK Query API
-export const { useFetchAlbumsQuery, useAddAlbumMutation, useRemoveAlbumMutationA } = albumsApi;
+export const { useFetchAlbumsQuery, useAddAlbumMutation, useRemoveAlbumMutation } = albumsApi;
 export { albumsApi };

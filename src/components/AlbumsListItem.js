@@ -10,11 +10,15 @@ function AlbumsListItem ({ album }) {
         removeAlbum(album); // Pass in the album we trying to delete
     };
 
-    const header = <div>
-        <Button loading={results.isLoading} onClick={handleRemoveAlbum}>
-            <GoTrashcan />
-        </Button>
-        {album.title} </div>;
+    const header = (
+        <>
+            <Button className="mr-2" loading={results.isLoading} onClick={handleRemoveAlbum}>
+                <GoTrashcan />
+            </Button>
+            {album.title} 
+        </>
+    );
+        
         return (
             <ExpandablePanel key={album.id} header={header}>
                 List of photos in the album
