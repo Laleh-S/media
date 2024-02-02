@@ -14,7 +14,7 @@
 // 9- Use the generated hooks in a component. //* inside AlbumsList component
 
 
-// fetch, create, delete requests for Users, Albums, photos. //* step 1 of Creating a RTK Query API
+// in this case we need: fetch, create, delete requests for Users, Albums, photos. //* step 1 of Creating a RTK Query API
 // We created this file inside store directory //* step 2 of Creating a RTK Query API
 
 //! Queries: 
@@ -42,10 +42,10 @@ const albumsApi = createApi({
     // The fetchBaseQuery will give us a pre-configured version of fetch.
     baseQuery: fetchBaseQuery({  //* step 4 of Creating a RTK Query API
     // The baseUrl is the root URL, of the server that we want to make requests to. For us the base URL of JSON Server,
-    baseUrl: 'http://localhost:3005',
-    fetchFn: async (...args) => {
-        await pause(1000);
-        return fetch(...args);
+        baseUrl: 'http://localhost:3005',
+        fetchFn: async (...args) => {
+            await pause(1000);
+            return fetch(...args);
     }
     }),
     endpoints(builder){  //* step 5 of Creating a RTK Query API
