@@ -2,6 +2,7 @@ import { useFetchAlbumsQuery, useAddAlbumMutation } from "../store";
 import Skeleton from "./Skeleton";
 import ExpandablePanel from "./ExpandablePanel";
 import Button from "./Button";
+import AlbumsListItem from "./AlbumsListItem"
 
 function AlbumsList ({ user }) {
     // Whenever we call this hook, we are going to immediately try to fetch some data.
@@ -27,10 +28,7 @@ function AlbumsList ({ user }) {
     } else {
         // Else, map over the array of data object and for each one, create an ExpandablePanel with the header of the album's title.
         content = data.map((album) => {
-            const header = <div>{album.title} </div>;
-            return <ExpandablePanel key={album.id} header={header}>
-                List of photos in the album
-            </ExpandablePanel>
+            return <AlbumsListItem key={album.id} album={album}/>
         });
     }
 
