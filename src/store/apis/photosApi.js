@@ -19,8 +19,28 @@ const photosApi = createApi({
                     };
                 },
             }),
-            addPhoto: builder.mutation({}),
-            RemovePhoto: builder.mutation({}),
+            addPhoto: builder.mutation({
+                query: (album) => { // This is the album we want to fetch the photos for
+                    return {
+                        url: '/photos',
+                        method: 'POST',
+                        body: {
+                            albumId: album.id,
+                            // 150 width and height, true argument is that we always get random photo
+                            url: faker.image.abstract(150, 150, true) 
+                        }
+                    };
+                },
+            }),
+            RemovePhoto: builder.mutation({
+                query: (photo) => {
+                    return {
+                        url: `/photos/${photo.id}`,
+                        method: 'DELETE',
+                        
+                    };
+                }
+            }),
         };
     }
 });
