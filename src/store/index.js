@@ -31,5 +31,5 @@ setupListeners(store.dispatch)   //* step 6 of Creating a RTK Query API
 export * from './thunks/fetchUsers';  //* step 5 of creating a thunk
 export * from './thunks/addUser';
 export * from './thunks/removeUser';
-export { useFetchAlbumsQuery, useAddAlbumMutation } from './apis/albumsApi';  //* step 8 of Creating a RTK Query API
+export { useFetchAlbumsQuery, useAddAlbumMutation, useRemoveAlbumMutation } from './apis/albumsApi';  //* step 8 of Creating a RTK Query API
 

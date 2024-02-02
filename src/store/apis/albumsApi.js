@@ -50,6 +50,15 @@ const albumsApi = createApi({
     }),
     endpoints(builder){  //* step 5 of Creating a RTK Query API
         return {
+            removeAlbum: builder.mutation({
+                query: (album) => { 
+                    return {
+                        url: `/albums/${album.id}`,
+                        method: 'DELETE'
+                    }
+                }
+            }),
+
             addAlbum: builder.mutation({
                 invalidatesTags: (result, error, user) => {
                     return [{type: 'Album', id: user.id}]
@@ -89,5 +98,5 @@ const albumsApi = createApi({
 // If put getAlbums instead, then the name of the hook would've instead been "useGetAlbumsQuery".
 
 //* step 6 of Creating a RTK Query API
-export const { useFetchAlbumsQuery, useAddAlbumMutation } = albumsApi;
+export const { useFetchAlbumsQuery, useAddAlbumMutation, useRemoveAlbumMutationA } = albumsApi;
 export { albumsApi };
