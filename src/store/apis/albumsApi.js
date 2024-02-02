@@ -17,6 +17,15 @@
 // fetch, create, delete requests for Users, Albums, photos. //* step 1 of Creating a RTK Query API
 // We created this file inside store directory //* step 2 of Creating a RTK Query API
 
+//! Queries: 
+// run immediately when the component is displayed on screen (by default)
+
+//! Mutations: 
+// give you a function to run when you want to change some data
+
+//! Tags
+// used to mark certain queries as being 'out of date' after specific mutations are executed.
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { faker } from "@faker-js/faker";
 
@@ -30,6 +39,9 @@ const albumsApi = createApi({
     endpoints(builder){  //* step 5 of Creating a RTK Query API
         return {
             addAlbum: builder.mutation({
+                invalidatesTags: (result, error, user) => {
+                    return [{type: 'Album', id: user.id}]
+                },
                 query: (user) => {
                     return {
                         url: '/albums',
@@ -43,6 +55,9 @@ const albumsApi = createApi({
             }),
 
             fetchAlbums: builder.query({
+                providesTags: (result, error, user) => {
+                    return [{type: 'Album', id: user.id}]
+                }, 
                 query: (user) => { // the user is an object with a name and an id.
                     return {
                         url: '/albums',
