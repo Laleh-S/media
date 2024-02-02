@@ -51,6 +51,9 @@ const albumsApi = createApi({
     endpoints(builder){  //* step 5 of Creating a RTK Query API
         return {
             removeAlbum: builder.mutation({
+                invalidatesTags: (result, error, album) => {
+                    return [{type: 'Album', id: album.id}]
+                },
                 query: (album) => { 
                     return {
                         url: `/albums/${album.id}`,
@@ -61,7 +64,7 @@ const albumsApi = createApi({
 
             addAlbum: builder.mutation({
                 invalidatesTags: (result, error, user) => {
-                    return [{type: 'Album', id: user.id}]
+                    return [{type: 'UsersAlbums', id: user.id}]
                 },
                 query: (user) => {
                     return {
@@ -76,8 +79,13 @@ const albumsApi = createApi({
             }),
 
             fetchAlbums: builder.query({
-                providesTags: (result, error, user) => {
-                    return [{type: 'Album', id: user.id}]
+                // The first argument "result", is the result or the data we fetched from the backend server which is our list of "albums".
+                providesTags: (result, error, user) => { 
+                    const tags = result.map((album) => { // creates one tag for each album
+                        return {type: 'Album', id: album.id} 
+                    });
+                    tags.push({type: 'UsersAlbums', id: user.id});
+                    return tags;
                 }, 
                 query: (user) => { // the user is an object with a name and an id.
                     return {
