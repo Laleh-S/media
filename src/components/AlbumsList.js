@@ -13,7 +13,7 @@ function AlbumsList ({ user }) {
     
     const { isLoading, data, error } = useFetchAlbumsQuery(user);   //* step 9 of Creating a RTK Query API
     const [ addAlbum, results] = useAddAlbumMutation();
-
+    
     const handleAddAlbum = () => {
         addAlbum(user); // This is the user we want to tie this album to 
     };
@@ -36,10 +36,13 @@ function AlbumsList ({ user }) {
 
     return (
         <div>
-            <div>Albums for {user.name}</div>
-            <Button onClick={handleAddAlbum}>
-                + Add Album
-            </Button>
+            <div className="m-2 flex flex-row items-center justify-between">
+                <h3 className="text-lg font-bold ">Albums for {user.name}</h3>
+                <Button loading={results.isLoading} onClick={handleAddAlbum}>
+                    + Add Album
+                </Button>
+            </div>
+            
             <div>{content}</div>
         </div>
     )
