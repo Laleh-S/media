@@ -8,9 +8,19 @@ const photosApi = createApi({
     }),
     endpoints(builder) {
         return {
-            fetchPhotos: builder.query({}),
+            fetchPhotos: builder.query({
+                query: (album) => { // This is the album we want to fetch the photos for
+                    return {
+                        url: '/photos',
+                        params: { // used to define query strings
+                            albumId: album.id
+                        },
+                        method: 'GET',
+                    };
+                },
+            }),
             addPhoto: builder.mutation({}),
-            RemovePhoto: builder.mutation({})
+            RemovePhoto: builder.mutation({}),
         };
     }
 });
