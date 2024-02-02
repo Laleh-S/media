@@ -18,7 +18,7 @@ const fetchUsers = createAsyncThunk('users/fetch', async () => { // 'users/fetch
 
      // DEV ONLY!
     await pause(1000);
- // ------
+    // ------
     return response.data; // <- Whatever we return here is automatically assigned to the payload property of the fulfilled action type.
     // response.data === [{id: 1,name: 'Laleh'}] <- this array is what we want to get access to inside our reducer
 });

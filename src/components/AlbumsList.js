@@ -21,7 +21,7 @@ function AlbumsList ({ user }) {
     let content;
     //  If isLoading is true, then set content to be skeleton.
     if (isLoading){
-        content = <Skeleton times={3} /> // 3 is the number of boxex
+        content = <Skeleton className="h-10 w-full" times={3} /> // 3 is the number of boxex and height and width.
     } else if (error){ // Else if there is an error object, we set content to be a div with an error message.
         content = <div>Error loading albums.</div>
     } else {

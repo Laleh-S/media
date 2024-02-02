@@ -29,12 +29,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { faker } from "@faker-js/faker";
 
+// DEV ONLY!
+const pause = (duration) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, duration)
+    });
+};
+// -------
+
 const albumsApi = createApi({
     reducerPath: 'albums',  //* step 3 of Creating a RTK Query API
     // The fetchBaseQuery will give us a pre-configured version of fetch.
     baseQuery: fetchBaseQuery({  //* step 4 of Creating a RTK Query API
     // The baseUrl is the root URL, of the server that we want to make requests to. For us the base URL of JSON Server,
-    baseUrl: 'http://localhost:3005'
+    baseUrl: 'http://localhost:3005',
+    fetchFn: async (...args) => {
+        await pause(1000);
+        return fetch(...args);
+    }
     }),
     endpoints(builder){  //* step 5 of Creating a RTK Query API
         return {
