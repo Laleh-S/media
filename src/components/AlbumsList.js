@@ -30,7 +30,7 @@ function AlbumsList ({ user }) {
     if (isFetching){
         content = <Skeleton className="h-10 w-full" times={3} /> // 3 is the number of boxex and height and width.
     } else if (error){ // Else if there is an error object, we set content to be a div with an error message.
-        content = <div>Error loading albums.</div>
+        content = <div>Error fetching albums...</div>
     } else {
         // Else, map over the array of data object and for each one, create an ExpandablePanel with the header of the album's title.
         content = data.map((album) => {
