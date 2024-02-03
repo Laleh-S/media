@@ -56,7 +56,18 @@
       "id": "7efd",
       "userId": "1",
       "title": "Refined Frozen Computer"
+    },
+    {
+      "id": "fd3e",
+      "userId": "a3c7",
+      "title": "Practical Fresh Chips"
     }
   ],
-  "photos": []
+  "photos": [
+    {
+      "id": "5702",
+      "albumId": "b97b",
+      "url": "https://loremflickr.com/150/150/abstract?lock=50028"
+    }
+  ]
 }

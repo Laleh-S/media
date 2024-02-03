@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { faker } from "@faker-js/faker";
 
 const photosApi = createApi({
@@ -32,15 +32,18 @@ const photosApi = createApi({
                     };
                 },
             }),
-            RemovePhoto: builder.mutation({
+            removePhoto: builder.mutation({
                 query: (photo) => {
                     return {
                         url: `/photos/${photo.id}`,
                         method: 'DELETE',
-                        
                     };
                 }
             }),
         };
     }
 });
+
+export const { useFetchPhotosQuery, useAddPhotoMutation, useRemovePhotoMutation} = photosApi;
+
+export { photosApi }
