@@ -9,6 +9,16 @@ const photosApi = createApi({
     endpoints(builder) {
         return {
             fetchPhotos: builder.query({
+                providesTags: (result, error, album) => { // "album" is the argument we provided to our query hook. 
+                    // going to build up our list of tags by mapping over the results.
+                    const tags = result.map((photo) => { 
+                        // for every single photo, I will return an object with a type of Photo and an id of the photos.id.
+                        return {type: 'photo', id: photo.id}
+                    });
+                    // Then going tags.push, one more object with a type of Albums to the very end of that array.
+                    tags.push({ type: 'AlbumPhoto', id: album.id });
+                    return tags;
+                },
                 query: (album) => { // This is the album we want to fetch the photos for
                     return {
                         url: '/photos',
@@ -20,6 +30,9 @@ const photosApi = createApi({
                 },
             }),
             addPhoto: builder.mutation({
+                invalidatesTags: (result, error, album) => {
+                    return [{type: 'AlbumPhoto', id: album.id}];
+                },
                 query: (album) => { // This is the album we want to fetch the photos for
                     return {
                         url: '/photos',
@@ -33,6 +46,9 @@ const photosApi = createApi({
                 },
             }),
             removePhoto: builder.mutation({
+                invalidatesTags: (result, error, photo) => {
+                    return [{type: 'photo', id: photo.id }];
+                },
                 query: (photo) => {
                     return {
                         url: `/photos/${photo.id}`,
